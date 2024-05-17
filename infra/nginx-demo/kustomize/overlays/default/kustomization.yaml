@@ -1,14 +1,11 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
-
 resources:
 - ../../base
-
 patches:
-  - path: nginx-depl.yaml
-
+- path: nginx-depl.yaml
 # rewrite and check this in to update images
 images:
-- name: gnomesoft/nginx-demo
-  # do not edit, this is updated by the nginx-demo pipeline
-  digest: sha256:c67b65808de8ebbda8e09403b0904e635abd7decbd6d1576ba3b3e60d9ba9480
+- digest: sha256:test
+  name: gnomesoft/nginx-demo
+  newName: gnomesoft/nginx-demo
