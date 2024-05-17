@@ -37,6 +37,7 @@ jobs:
             # debug
             ls -la
             KUSTOMIZE=$(which kustomize)
+            echo $KUSTOMIZE
             ${KUSTOMIZE} edit set image gnomesoft/nginx-demo=gnomesoft/nginx-demo@sha256:c67b65808de8ebbda8e09403b0904e635abd7decbd6d1576ba3b3e60d9ba9480
 
             git checkout -b update-manifest-${IMAGE_TAG}
