@@ -54,6 +54,7 @@ jobs:
       - run:
           name: Raise PR
           command: |
+            set -x
             IMAGE_TAG=$(echo '<< pipeline.trigger_parameters.webhook.body >>' | jq -r '.push_data.tag')
             NAMESPACE=$(echo '<< pipeline.trigger_parameters.webhook.body >>' | jq -r '.repository.namespace')
             REPO_NAME=$(echo '<< pipeline.trigger_parameters.webhook.body >>' | jq -r '.repository.name')
