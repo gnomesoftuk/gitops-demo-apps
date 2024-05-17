@@ -41,6 +41,9 @@ jobs:
             
             ${KUSTOMIZE} edit set image gnomesoft/nginx-demo=gnomesoft/nginx-demo@sha256:c67b65808de8ebbda8e09403b0904e635abd7decbd6d1576ba3b3e60d9ba9480
 
+            git config user.email "roger.watkins@gnomesoft.co.uk"
+            git config user.name "Circle CI"
+
             git checkout -b update-manifest-${IMAGE_TAG}
             git add -u .
             git commit -m "update manifest digest to ${DIGEST}"
