@@ -11,4 +11,4 @@ patches:
 images:
 - name: gnomesoft/nginx-demo
   # do not edit, this is updated by the nginx-demo pipeline
-  digest: sha256:6a821e5afe39e737ec09f9a56ca88b81e69528f99eda8f424df4ce6fc490420d
+  digest: sha256:c67b65808de8ebbda8e09403b0904e635abd7decbd6d1576ba3b3e60d9ba9480
