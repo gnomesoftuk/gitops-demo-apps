@@ -1,0 +1,26 @@
+# CircleCI configuration file
+# See: https://circleci.com/docs/configuration-reference
+version: 2.1
+
+workflows:
+  main:
+    jobs:
+      - release:
+          context:
+            - DockerHub
+          filters:
+            branches:
+              only:
+                - main
+
+jobs:
+  build:
+    machine:
+      image: default
+    resource_class: small
+    steps:
+      - checkout
+
+      - run: |
+          echo "TODO: write webhook into dockerhub if it isn't there"
+
