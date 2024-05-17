@@ -6,6 +6,6 @@ patches:
 - path: nginx-depl.yaml
 # rewrite and check this in to update images
 images:
-- digest: sha256:test
+- digest: sha256:c67b65808de8ebbda8e09403b0904e635abd7decbd6d1576ba3b3e60d9ba9480
   name: gnomesoft/nginx-demo
   newName: gnomesoft/nginx-demo
