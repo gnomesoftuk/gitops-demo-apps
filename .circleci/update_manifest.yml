@@ -49,7 +49,7 @@ jobs:
             git checkout -b update-manifest-${IMAGE_TAG}
             git add -u .
             git commit -m "update manifest digest to ${DIGEST}"
-            git push origin update-manifest-${IMAGE_TAG}
+            git push --force-with-lease origin update-manifest-${IMAGE_TAG}
   
       - run:
           name: Raise PR
