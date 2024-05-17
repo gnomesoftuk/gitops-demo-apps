@@ -1,0 +1,13 @@
+
+# CircleCI configuration file
+# See: https://circleci.com/docs/configuration-reference
+version: 2.1
+jobs:
+  deploy:
+    docker:
+      - image: cimg/base:stable
+    steps:
+      - run:
+          name: deploy
+          command: |
+            echo 'update deployment manifest'
