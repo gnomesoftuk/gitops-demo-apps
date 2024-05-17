@@ -24,10 +24,10 @@ jobs:
             IMAGE_TAG=$(echo '<< pipeline.trigger_parameters.webhook.body >>' | jq -r '.push_data.tag')
             NAMESPACE=$(echo '<< pipeline.trigger_parameters.webhook.body >>' | jq -r '.repository.namespace')
             REPO_NAME=$(echo '<< pipeline.trigger_parameters.webhook.body >>' | jq -r '.repository.name')
-            DIGEST=$(curl -H 'Content-Type:application/json' \
-            https://hub.docker.com/v2/namespaces/${NAMESPACE}/repositories/${REPO_NAME}/tags/${IMAGE_TAG} \
-            jq -r '.digest')
-
+            QUERY_URL="https://hub.docker.com/v2/namespaces/${NAMESPACE}/repositories/${REPO_NAME}/tags/${IMAGE_TAG}"
+            
+            echo "querying ${QUERY_URL}"
+            DIGEST=$(curl -H 'Content-Type:application/json' ${QUERY_URL} | jq -r '.digest')
             echo $DIGEST
 
             # cd ./infra/nginx-demo/kustomize/overlays/default
