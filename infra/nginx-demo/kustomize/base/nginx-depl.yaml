@@ -22,6 +22,10 @@ spec:
       containers:
       - image: gnomesoft/nginx-demo
         name: nginx
+        ports:
+          - containerPort: 8080
+            protocol: TCP
+            name: http
       imagePullSecrets:
       # this secret does not seem to work for some reason
         - name: dockerhub
