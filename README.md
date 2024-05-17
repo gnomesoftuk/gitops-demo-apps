@@ -6,5 +6,9 @@ These are kept separate from the application code to decouple them
 
 # demo features
 
-When making changes to the nginx-demo repository, any new images built from it
-will result in a manifest change PR being submitted to this repo
+New demo images in dockerhub will fire a webhook to circleCI which will update
+the demo manifest with a new image digest and raise a PR
+
+This requires human approval !
+
+-> See gitops-argocd-apps to see how this gets deployed
