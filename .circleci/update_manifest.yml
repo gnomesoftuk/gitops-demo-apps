@@ -27,11 +27,11 @@ jobs:
             QUERY_URL="https://hub.docker.com/v2/namespaces/${NAMESPACE}/repositories/${REPO_NAME}/tags/${IMAGE_TAG}"
             
             echo "querying ${QUERY_URL}"
-            DIGEST=$(curl -H 'Content-Type:application/json' ${QUERY_URL} | jq -r '.digest')
-            echo $DIGEST
+            DIGEST=$(curl -s -H 'Content-Type:application/json' ${QUERY_URL} | jq -r '.digest')
+            echo "update nginx manifest digest to ${DIGEST} ..."
 
-            # cd ./infra/nginx-demo/kustomize/overlays/default
-            # kustomize edit set image gnomesoft/nginx-demo=gnomesoft/nginx-demo@sha256:c67b65808de8ebbda8e09403b0904e635abd7decbd6d1576ba3b3e60d9ba9480
+            cd ./infra/nginx-demo/kustomize/overlays/default
+            kustomize edit set image gnomesoft/nginx-demo=gnomesoft/nginx-demo@sha256:c67b65808de8ebbda8e09403b0904e635abd7decbd6d1576ba3b3e60d9ba9480
 
             # TODO: pick this up next week and use the digest to rewrite the kustomize file and check it in
 
