@@ -6,7 +6,7 @@ version: 2.1
 workflows:
   webhook:
     jobs:
-      - deploy:
+      - deploy
 
 jobs:
   deploy:
