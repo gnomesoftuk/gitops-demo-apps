@@ -15,14 +15,17 @@ jobs:
     resource_class: small
     steps:
       - checkout
-      - run:
-          name: install tools
-          command: |
-            curl -s "https://raw.githubusercontent.com/kubernetes-sigs/kustomize/master/hack/install_kustomize.sh"  | bash
+
       - run:
           name: update manifest
           command: |
             echo "Triggered by new image..."
+
+            echo "install tools..."
+            curl -s "https://raw.githubusercontent.com/kubernetes-sigs/kustomize/master/hack/install_kustomize.sh"  | bash
+            KUSTOMIZE=$(which kustomize)
+            echo $KUSTOMIZE
+            echo "done"
 
             IMAGE_TAG=$(echo '<< pipeline.trigger_parameters.webhook.body >>' | jq -r '.push_data.tag')
             NAMESPACE=$(echo '<< pipeline.trigger_parameters.webhook.body >>' | jq -r '.repository.namespace')
@@ -36,8 +39,7 @@ jobs:
             cd ./infra/nginx-demo/kustomize/overlays/default
             # debug
             ls -la
-            KUSTOMIZE=$(which kustomize)
-            echo $KUSTOMIZE
+            
             ${KUSTOMIZE} edit set image gnomesoft/nginx-demo=gnomesoft/nginx-demo@sha256:c67b65808de8ebbda8e09403b0904e635abd7decbd6d1576ba3b3e60d9ba9480
 
             git checkout -b update-manifest-${IMAGE_TAG}
