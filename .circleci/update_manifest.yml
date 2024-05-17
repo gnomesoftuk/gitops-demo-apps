@@ -20,6 +20,18 @@ jobs:
           name: update manifest
           command: |
             echo "Triggered by new image..."
-            #cd ./infra/nginx-demo/kustomize/overlays/default
-            #kustomize edit set image gnomesoft/nginx-demo=gnomesoft/nginx-demo@sha256:c67b65808de8ebbda8e09403b0904e635abd7decbd6d1576ba3b3e60d9ba9480
-            echo << pipeline.trigger_parameters.webhook.body >> | jq
+
+            IMAGE_TAG=$(echo '<< pipeline.trigger_parameters.webhook.body >>' | jq -r '.push_data.tag')
+            NAMESPACE=$(echo '<< pipeline.trigger_parameters.webhook.body >>' | jq -r '.repository.namespace')
+            REPO_NAME=$(echo '<< pipeline.trigger_parameters.webhook.body >>' | jq -r '.repository.name')
+            DIGEST=$(curl -H 'Content-Type:application/json' \
+            https://hub.docker.com/v2/namespaces/${NAMESPACE}/repositories/${REPO_NAME}/tags/${IMAGE_TAG} \
+            jq -r '.digest')
+
+            echo $DIGEST
+
+            # cd ./infra/nginx-demo/kustomize/overlays/default
+            # kustomize edit set image gnomesoft/nginx-demo=gnomesoft/nginx-demo@sha256:c67b65808de8ebbda8e09403b0904e635abd7decbd6d1576ba3b3e60d9ba9480
+
+            # TODO: pick this up next week and use the digest to rewrite the kustomize file and check it in
+
