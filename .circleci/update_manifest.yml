@@ -1,0 +1,18 @@
+
+# CircleCI configuration file
+# See: https://circleci.com/docs/configuration-reference
+version: 2.1
+jobs:
+  deploy:
+    docker:
+      - image: cimg/base:stable
+    steps:
+      - checkout
+
+      - run:
+          name: update manifest
+          command: |
+            echo "Triggered by new image..."
+            #cd ./infra/nginx-demo/kustomize/overlays/default
+            #kustomize edit set image gnomesoft/nginx-demo=gnomesoft/nginx-demo@sha256:c67b65808de8ebbda8e09403b0904e635abd7decbd6d1576ba3b3e60d9ba9480
+            env

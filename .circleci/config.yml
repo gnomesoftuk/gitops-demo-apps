@@ -3,11 +3,11 @@
 # See: https://circleci.com/docs/configuration-reference
 version: 2.1
 jobs:
-  deploy:
+  nothing:
     docker:
       - image: cimg/base:stable
     steps:
       - run:
-          name: deploy
+          name: nothing
           command: |
             echo 'update deployment manifest'
