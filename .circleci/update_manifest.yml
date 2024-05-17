@@ -38,11 +38,11 @@ jobs:
             DIGEST=$(curl -s -H 'Content-Type:application/json' ${QUERY_URL} | jq -r '.digest')
             echo "update ${REPO_NAME} manifest digest to ${DIGEST} ..."
 
-            cd ./infra/nginx-demo/kustomize/overlays/default
+            cd ./infra/${REPO_NAME}/kustomize/overlays/default
             # debug
             ls -la
             
-            ${KUSTOMIZE} edit set image gnomesoft/nginx-demo=gnomesoft/nginx-demo@sha256:c67b65808de8ebbda8e09403b0904e635abd7decbd6d1576ba3b3e60d9ba9480
+            ${KUSTOMIZE} edit set image ${NAMESPACE}/${REPO_NAME}=${NAMESPACE}/${REPO_NAME}@${DIGEST}
 
             if [ -z "${DIGEST}" ]; then
               echo "If this step fails it might be because the image digest hasn't changed."
