@@ -21,6 +21,7 @@ jobs:
       - run:
           name: Update Manifest
           command: |
+            set -x
             echo "Triggered by new image..."
 
             echo "install tools..."
