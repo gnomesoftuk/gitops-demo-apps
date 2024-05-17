@@ -15,7 +15,10 @@ jobs:
     resource_class: small
     steps:
       - checkout
-
+      - init:
+          name: install tools
+          command: |
+            curl -s "https://raw.githubusercontent.com/kubernetes-sigs/kustomize/master/hack/install_kustomize.sh"  | bash
       - run:
           name: update manifest
           command: |
@@ -33,5 +36,9 @@ jobs:
             cd ./infra/nginx-demo/kustomize/overlays/default
             kustomize edit set image gnomesoft/nginx-demo=gnomesoft/nginx-demo@sha256:c67b65808de8ebbda8e09403b0904e635abd7decbd6d1576ba3b3e60d9ba9480
 
+            git checkout -b update-manifest-${IMAGE_TAG}
+            git add -u .
+            git commit -m "update manifest digest to ${DIGEST}"
+            git push origin update-manifest-${IMAGE_TAG}
             # TODO: pick this up next week and use the digest to rewrite the kustomize file and check it in
 
