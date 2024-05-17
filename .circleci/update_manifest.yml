@@ -23,8 +23,8 @@ jobs:
 
             echo "install tools..."
             curl -s "https://raw.githubusercontent.com/kubernetes-sigs/kustomize/master/hack/install_kustomize.sh"  | bash
-            KUSTOMIZE=$(which kustomize)
-            echo $KUSTOMIZE
+            
+            which kustomize
             echo "done"
 
             IMAGE_TAG=$(echo '<< pipeline.trigger_parameters.webhook.body >>' | jq -r '.push_data.tag')
