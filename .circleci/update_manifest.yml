@@ -68,7 +68,7 @@ jobs:
             --url https://api.github.com/repos/${GH_USER}/${CIRCLE_PROJECT_REPONAME}/pulls \
             --data-binary @- \<< EOF
             {
-                "title": "Nginx image update",
+                "title": "${REPO_NAME} image update: ${IMAGE_TAG}",
                 "body": "Updated digest for image ${NAMESPACE}/${REPO_NAME}:${IMAGE_TAG}",
                 "head": "update-manifest-${IMAGE_TAG}",
                 "base": "${CIRCLE_BRANCH}"
